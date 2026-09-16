@@ -5,7 +5,7 @@ logs and will analyze failures with Python, pandas, regular expressions, and
 Splunk. The project focuses on explainable operational diagnostics, measurable
 benchmarks, and reusable incident documentation.
 
-> **Project status:** Day 1 foundation complete. The current dataset and results
+> **Project status:** Day 2 parsing pipeline complete. The current dataset and results
 > are synthetic; no production system or customer data is represented.
 
 ## Day 1 capabilities
@@ -16,6 +16,16 @@ benchmarks, and reusable incident documentation.
 - Injects two configured error-spike windows for later detection testing.
 - Produces Splunk-friendly line-oriented logs without secrets or personal data.
 - Includes tests for deterministic identifiers, anomaly boundaries, and schema.
+
+## Day 2 capabilities
+
+- Parses the complete log schema with compiled regular expressions.
+- Validates timestamps, severity levels, HTTP methods, status codes, endpoints,
+  and response times.
+- Isolates malformed records with line number, reason, and original evidence.
+- Exports normalized events to CSV and JSON for pandas and Splunk ingestion.
+- Produces a machine-readable parse summary and JSON operational logs.
+- Uses documented exit codes for automation and support diagnostics.
 
 ## Failure scenarios
 
@@ -32,7 +42,9 @@ python -m venv .venv
 # Windows PowerShell: .venv\Scripts\Activate.ps1
 # Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e .
 python scripts/generate_logs.py
+python -m log_anomaly_detector.cli parse --input data/sample_application.log --output reports
 python -m pytest
 ```
 
@@ -47,7 +59,7 @@ These counts are reproducible with seed `42`; changing the configuration changes
 ## Roadmap
 
 - [x] Repository structure and reproducible log generator
-- [ ] Regex parser and malformed-record handling
+- [x] Regex parser and malformed-record handling
 - [ ] Explainable rule-based and statistical anomaly detection
 - [ ] CSV and HTML operational reports
 - [ ] Splunk dashboard, saved searches, and trial-license alert
