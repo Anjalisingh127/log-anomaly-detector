@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=78"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "log-anomaly-detector"
+version = "0.1.0"
+description = "Reproducible application-log generator and anomaly-analysis toolkit"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Anjali Singh" }]
+dependencies = ["pandas==2.3.2", "PyYAML==6.0.2"]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
+[project.scripts]
+log-anomaly-detector = "log_anomaly_detector.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

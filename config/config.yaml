@@ -1,0 +1,16 @@
+generator:
+  seed: 42
+  event_count: 5000
+  start_time: "2026-09-01T09:00:00Z"
+  interval_seconds: 2
+  anomaly_windows:
+    - start_event: 900
+      length: 80
+    - start_event: 3100
+      length: 100
+
+detection:
+  window_minutes: 5
+  z_score_threshold: 2.5
+  slow_request_ms: 1500
+  consecutive_auth_failures: 5
