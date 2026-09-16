@@ -1,0 +1,31 @@
+name: log-anomaly-detector
+
+services:
+  splunk:
+    image: splunk/splunk:10.4.3
+    container_name: log-anomaly-splunk
+    hostname: log-anomaly-splunk
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_GENERAL_TERMS: --accept-sgt-current-at-splunk-com
+      SPLUNK_PASSWORD: ${SPLUNK_PASSWORD:?Create a .env file and set SPLUNK_PASSWORD}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - splunk-etc:/opt/splunk/etc
+      - splunk-var:/opt/splunk/var
+      - ./data/sample_application.log:/data/sample_application.log:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS -o /dev/null http://127.0.0.1:8000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 180s
+    mem_limit: 4g
+    cpus: 4
+    restart: "no"
+    stop_grace_period: 2m
+
+volumes:
+  splunk-etc:
+  splunk-var:

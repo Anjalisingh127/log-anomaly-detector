@@ -100,6 +100,7 @@ These counts are reproducible with seed `42`; changing the configuration changes
 - [Reusable incident note template](docs/incident-note-template.md)
 - [Worked synthetic incident](docs/sample-incident.md)
 - [Performance methodology](docs/performance-methodology.md)
+- [Splunk Enterprise Docker setup](splunk/docker-setup.md)
 
 ## Ethics and measurement
 
