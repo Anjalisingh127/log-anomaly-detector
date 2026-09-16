@@ -5,7 +5,7 @@ logs and will analyze failures with Python, pandas, regular expressions, and
 Splunk. The project focuses on explainable operational diagnostics, measurable
 benchmarks, and reusable incident documentation.
 
-> **Project status:** Day 3 anomaly detection complete. The current dataset and results
+> **Project status:** Day 4 reporting and benchmark tooling complete. The current dataset and results
 > are synthetic; no production system or customer data is represented.
 
 ## Day 1 capabilities
@@ -36,6 +36,14 @@ benchmarks, and reusable incident documentation.
 - Handles zero-variance baselines without division errors.
 - Exports anomaly evidence, window metrics, and a JSON detection summary.
 
+## Day 4 capabilities
+
+- Generates a self-contained HTML operations report with no external scripts.
+- Visualizes error trends, failure categories, affected services, and hosts.
+- Publishes detection thresholds and synthetic-data disclosure with the evidence.
+- Measures median scripted execution time across repeated trials.
+- Calculates time reduction only after a real manual timing is supplied.
+
 ## Failure scenarios
 
 1. Database connection timeout
@@ -54,7 +62,8 @@ pip install -r requirements.txt
 pip install -e .
 python scripts/generate_logs.py
 python -m log_anomaly_detector.cli parse --input data/sample_application.log --output reports
-python -m log_anomaly_detector.cli analyze --input data/sample_application.log --output reports
+python -m log_anomaly_detector.cli analyze --input data/sample_application.log --output reports --html-report docs/index.html
+python scripts/benchmark.py --runs 7
 python -m pytest
 ```
 
@@ -71,7 +80,7 @@ These counts are reproducible with seed `42`; changing the configuration changes
 - [x] Repository structure and reproducible log generator
 - [x] Regex parser and malformed-record handling
 - [x] Explainable rule-based and statistical anomaly detection
-- [ ] CSV and HTML operational reports
+- [x] CSV and HTML operational reports
 - [ ] Splunk dashboard, saved searches, and trial-license alert
 - [ ] Five-error incident runbook and measured benchmark
 - [ ] GitHub Pages report and demonstration media

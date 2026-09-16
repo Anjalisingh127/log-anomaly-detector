@@ -13,6 +13,7 @@ import yaml
 
 from .detector import detect_anomalies, export_detections, load_detection_config
 from .parser import export_result, parse_file
+from .reporter import generate_html_report
 
 EXIT_SUCCESS = 0
 EXIT_INPUT_ERROR = 2
@@ -70,6 +71,7 @@ def build_parser() -> argparse.ArgumentParser:
     analyze_command.add_argument("--input", type=Path, required=True)
     analyze_command.add_argument("--output", type=Path, default=Path("reports"))
     analyze_command.add_argument("--config", type=Path, default=Path("config/config.yaml"))
+    analyze_command.add_argument("--html-report", type=Path, help="Write a self-contained public HTML report")
     return parser
 
 
@@ -110,6 +112,8 @@ def run_analyze(args: argparse.Namespace) -> int:
         config = load_detection_config(args.config)
         result = detect_anomalies(parsed.events, config)
         paths = export_detections(result, args.output)
+        if args.html_report:
+            generate_html_report(parsed, result, args.html_report)
     except (OSError, UnicodeError, TypeError, ValueError, yaml.YAMLError) as exc:
         logging.getLogger(__name__).exception("analysis_failed", extra={"reason": str(exc)})
         return EXIT_PROCESSING_ERROR

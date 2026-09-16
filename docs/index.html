@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Application Support Operations Report</title><style>
+:root{--ink:#172033;--muted:#627089;--panel:#fff;--bg:#f4f7fb;--accent:#3757d5;--danger:#dc3545}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:1120px;margin:auto;padding:42px 22px}header{padding:30px;background:#172033;color:white;border-radius:16px}
+h1{margin:0 0 8px;font-size:2rem}h2{margin-top:36px}.sub{color:#d7deed;margin:0}.notice{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0}
+.card,figure,table{background:var(--panel);border:1px solid #dce3ef;border-radius:12px;box-shadow:0 5px 16px #1720330d}
+.card{padding:20px}.metric{font-size:1.8rem;font-weight:750}.label{color:var(--muted)}figure{margin:16px 0;padding:20px;overflow:hidden}
+figcaption{font-weight:700;margin-bottom:12px}svg{display:block;width:100%;height:auto}svg text{fill:var(--ink);font-size:14px}svg rect{fill:var(--accent)}
+.timeline line{stroke:#9aa7bb}.timeline polyline{fill:none;stroke:var(--accent);stroke-width:3}.timeline circle{fill:var(--danger)}
+.legend{color:var(--muted)}.legend span{display:inline-block;width:10px;height:10px;background:var(--danger);border-radius:50%;margin-right:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,430px),1fr));gap:16px}table{width:100%;border-collapse:collapse;overflow:hidden}
+th,td{padding:12px;text-align:left;border-bottom:1px solid #e7ebf2}th{background:#eef2fa}footer{margin-top:38px;color:var(--muted)}
+</style></head><body><main><header><h1>Application Support Operations Report</h1>
+<p class="sub">Explainable log analysis for a reproducible synthetic application environment</p></header>
+<p class="notice"><strong>Portfolio evidence:</strong> All events are synthetic. No production or customer data is represented. Dataset final timestamp: 2026-09-01T11:46:38.000Z.</p>
+<section class="cards"><div class="card"><div class="metric">5,000</div><div class="label">Events analyzed</div></div>
+<div class="card"><div class="metric">304</div><div class="label">Error/critical events</div></div>
+<div class="card"><div class="metric">6.08%</div><div class="label">Error rate</div></div>
+<div class="card"><div class="metric">3</div><div class="label">Spike windows</div></div>
+<div class="card"><div class="metric">0</div><div class="label">Malformed records</div></div></section>
+<h2>Operational timeline</h2><figure><figcaption>Errors per five-minute window</figcaption><svg class="timeline" viewBox="0 0 900 280" role="img" aria-label="Error timeline with spike windows"><line x1="48" y1="238" x2="876" y2="238" /><polyline points="48.0,222.0 72.4,230.0 96.7,206.0 121.1,218.0 145.4,222.0 169.8,214.0 194.1,30.0 218.5,214.0 242.8,210.0 267.2,194.0 291.5,206.0 315.9,222.0 340.2,222.0 364.6,222.0 388.9,206.0 413.3,222.0 437.6,218.0 462.0,210.0 486.4,226.0 510.7,214.0 535.1,126.0 559.4,90.0 583.8,214.0 608.1,218.0 632.5,210.0 656.8,202.0 681.2,206.0 705.5,206.0 729.9,206.0 754.2,198.0 778.6,226.0 802.9,206.0 827.3,206.0 851.6,234.0 876.0,238.0" /><circle cx="194.1" cy="30.0" r="6"><title>2026-09-01 09:30:00+00:00: 52 errors</title></circle><circle cx="535.1" cy="126.0" r="6"><title>2026-09-01 10:40:00+00:00: 28 errors</title></circle><circle cx="559.4" cy="90.0" r="6"><title>2026-09-01 10:45:00+00:00: 37 errors</title></circle></svg><p class="legend"><span></span> Red markers indicate statistically flagged spike windows.</p></figure>
+<div class="grid"><figure><figcaption>Top failure categories</figcaption><svg viewBox="0 0 760 300" role="img" aria-label="Top failure categories"><text x="178" y="60" text-anchor="end">AUTHENTICATION_FAILURE</text><rect x="190" y="42" width="535" height="25" rx="4" /><text x="733" y="60">69</text><text x="178" y="102" text-anchor="end">INTERNAL_SERVER_ERROR</text><rect x="190" y="84" width="511" height="25" rx="4" /><text x="709" y="102">66</text><text x="178" y="144" text-anchor="end">DATABASE_TIMEOUT</text><rect x="190" y="126" width="488" height="25" rx="4" /><text x="686" y="144">63</text><text x="178" y="186" text-anchor="end">RATE_LIMIT_EXCEEDED</text><rect x="190" y="168" width="465" height="25" rx="4" /><text x="663" y="186">60</text><text x="178" y="228" text-anchor="end">RESOURCE_PRESSURE</text><rect x="190" y="210" width="356" height="25" rx="4" /><text x="554" y="228">46</text></svg></figure>
+<figure><figcaption>Errors by service</figcaption><svg viewBox="0 0 760 300" role="img" aria-label="Errors by service"><text x="178" y="60" text-anchor="end">catalog-service</text><rect x="190" y="42" width="535" height="25" rx="4" /><text x="733" y="60">83</text><text x="178" y="102" text-anchor="end">order-service</text><rect x="190" y="84" width="535" height="25" rx="4" /><text x="733" y="102">83</text><text x="178" y="144" text-anchor="end">payment-service</text><rect x="190" y="126" width="464" height="25" rx="4" /><text x="662" y="144">72</text><text x="178" y="186" text-anchor="end">auth-service</text><rect x="190" y="168" width="425" height="25" rx="4" /><text x="623" y="186">66</text></svg></figure>
+<figure><figcaption>Errors by host</figcaption><svg viewBox="0 0 760 300" role="img" aria-label="Errors by host"><text x="178" y="60" text-anchor="end">app-01</text><rect x="190" y="42" width="535" height="25" rx="4" /><text x="733" y="60">89</text><text x="178" y="102" text-anchor="end">app-04</text><rect x="190" y="84" width="450" height="25" rx="4" /><text x="648" y="102">75</text><text x="178" y="144" text-anchor="end">app-03</text><rect x="190" y="126" width="438" height="25" rx="4" /><text x="636" y="144">73</text><text x="178" y="186" text-anchor="end">app-02</text><rect x="190" y="168" width="402" height="25" rx="4" /><text x="600" y="186">67</text></svg></figure></div>
+<h2>Detection controls</h2><table><thead><tr><th>Control</th><th>Configured value</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>Window</td><td>5 minutes</td><td>Operational aggregation</td></tr>
+<tr><td>Z-score</td><td>2.5</td><td>Error-spike threshold</td></tr>
+<tr><td>Slow request</td><td>1500 ms</td><td>Latency rule</td></tr>
+<tr><td>Authentication sequence</td><td>5</td><td>Repeated-failure rule</td></tr>
+</tbody></table><footer>Generated locally by Log Anomaly Detector. Results are deterministic for seed 42.</footer>
+</main></body></html>
