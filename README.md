@@ -5,6 +5,10 @@ logs and will analyze failures with Python, pandas, regular expressions, and
 Splunk. The project focuses on explainable operational diagnostics, measurable
 benchmarks, and reusable incident documentation.
 
+**[Live operations report](https://anjalisingh127.github.io/log-anomaly-detector/)**
+· **[Incident runbook](docs/incident-runbook.md)**
+· **[Incident note template](docs/incident-note-template.md)**
+
 > **Project status:** Day 4 reporting and benchmark tooling complete. The current dataset and results
 > are synthetic; no production system or customer data is represented.
 
@@ -82,14 +86,20 @@ These counts are reproducible with seed `42`; changing the configuration changes
 - [x] Explainable rule-based and statistical anomaly detection
 - [x] CSV and HTML operational reports
 - [ ] Splunk dashboard, saved searches, and trial-license alert
-- [ ] Five-error incident runbook and measured benchmark
-- [ ] GitHub Pages report and demonstration media
+- [x] Five-error incident runbook
+- [ ] Measured manual-versus-script benchmark
+- [x] GitHub Pages report
+- [ ] Demonstration media
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
 - [Local setup](docs/setup-guide.md)
 - [Dataset notes](data/README.md)
+- [Application support incident runbook](docs/incident-runbook.md)
+- [Reusable incident note template](docs/incident-note-template.md)
+- [Worked synthetic incident](docs/sample-incident.md)
+- [Performance methodology](docs/performance-methodology.md)
 
 ## Ethics and measurement
 
