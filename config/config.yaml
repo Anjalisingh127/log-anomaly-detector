@@ -14,3 +14,4 @@ detection:
   z_score_threshold: 2.5
   slow_request_ms: 1500
   consecutive_auth_failures: 5
+  baseline_windows: 6

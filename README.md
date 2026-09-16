@@ -5,7 +5,7 @@ logs and will analyze failures with Python, pandas, regular expressions, and
 Splunk. The project focuses on explainable operational diagnostics, measurable
 benchmarks, and reusable incident documentation.
 
-> **Project status:** Day 2 parsing pipeline complete. The current dataset and results
+> **Project status:** Day 3 anomaly detection complete. The current dataset and results
 > are synthetic; no production system or customer data is represented.
 
 ## Day 1 capabilities
@@ -27,6 +27,15 @@ benchmarks, and reusable incident documentation.
 - Produces a machine-readable parse summary and JSON operational logs.
 - Uses documented exit codes for automation and support diagnostics.
 
+## Day 3 capabilities
+
+- Flags `ERROR`/`CRITICAL`, HTTP 5xx, slow requests, and database timeouts.
+- Detects configurable consecutive authentication-failure sequences.
+- Aggregates errors into five-minute operational windows.
+- Uses a six-window rolling baseline and explainable z-scores to flag spikes.
+- Handles zero-variance baselines without division errors.
+- Exports anomaly evidence, window metrics, and a JSON detection summary.
+
 ## Failure scenarios
 
 1. Database connection timeout
@@ -45,6 +54,7 @@ pip install -r requirements.txt
 pip install -e .
 python scripts/generate_logs.py
 python -m log_anomaly_detector.cli parse --input data/sample_application.log --output reports
+python -m log_anomaly_detector.cli analyze --input data/sample_application.log --output reports
 python -m pytest
 ```
 
@@ -60,7 +70,7 @@ These counts are reproducible with seed `42`; changing the configuration changes
 
 - [x] Repository structure and reproducible log generator
 - [x] Regex parser and malformed-record handling
-- [ ] Explainable rule-based and statistical anomaly detection
+- [x] Explainable rule-based and statistical anomaly detection
 - [ ] CSV and HTML operational reports
 - [ ] Splunk dashboard, saved searches, and trial-license alert
 - [ ] Five-error incident runbook and measured benchmark
