@@ -1,0 +1,130 @@
+<dashboard version="1.1" theme="dark">
+  <label>Application Support Operations</label>
+  <description>Monitoring dashboard for 5,000 synthetic application log events, including errors, latency, service health, and recurring failure patterns.</description>
+  <row>
+    <panel>
+      <title>Total Events</title>
+      <single>
+        <search>
+          <query>index=app_support
+| stats count AS "Total Events"</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051", "0x0877a6", "0xf8be34", "0xf1813f", "0xdc4e41"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <title>Error and Critical Events</title>
+        <search>
+          <query>index=app_support level IN ("ERROR","CRITICAL")
+| stats count AS "Error and Critical Events"</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Error Trend — 5-Minute Windows</title>
+        <search>
+          <query>index=app_support level IN ("ERROR","CRITICAL")
+| timechart span=5m count AS error_count</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Failures by Error Type</title>
+        <search>
+          <query>index=app_support error_type!="NONE"
+| stats count AS event_count by error_type
+| sort - event_count</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Errors by Service</title>
+        <search>
+          <query>index=app_support level IN ("ERROR","CRITICAL")
+| stats count AS error_count by service
+| sort - error_count</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Service Latency — Average vs P95</title>
+        <search>
+          <query>index=app_support
+| stats avg(response_time_ms) AS average_ms
+        perc95(response_time_ms) AS p95_ms
+  by service
+| eval average_ms=round(average_ms, 1),
+       p95_ms=round(p95_ms, 1)
+| sort - p95_ms</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Recent Critical Events</title>
+        <search>
+          <query>index=app_support level="CRITICAL"
+| table _time service error_type status_code response_time_ms request_id message
+| sort - _time
+| head 10</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
